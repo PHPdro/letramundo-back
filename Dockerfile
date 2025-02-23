@@ -1,4 +1,4 @@
-FROM webdevops/php-apache:8.4-alpine
+FROM webdevops/php-apache:8.2-alpine
 
 RUN apk update && apk upgrade
 RUN apk add --update --no-cache oniguruma-dev curl-dev libxml2-dev wget nano
