@@ -1,0 +1,45 @@
+services:
+    laravel:
+      container_name: letramundo_back
+      image: ghcr.io/phpdro/letramundo-back/letramundo-back:latest
+      ports:
+        - 8080:80
+      networks:
+        - letramundo
+      volumes:
+        - /home/phpdro/Documents/projects/letramundo-back:/app
+      environment:
+        - APP_ENV=local
+
+    mysql:
+      container_name: letramundo_db
+      image: mysql:latest
+      ports:
+        - 3306:3306
+      volumes:
+        - './mysql:/var/lib/mysql'
+      networks:
+        - letramundo
+      environment:
+        ALLOW_EMPTY_PASSWORD: "no"
+        MYSQL_ROOT_PASSWORD: admin
+        MYSQL_DATABASE: letramundo
+        MYSQL_USER: admin
+        MYSQL_PASSWORD: admin
+
+    phpmyadmin:
+      container_name: letramundo_phpmyadmin
+      image: phpmyadmin:latest
+      environment:
+        - MYSQL_ROOT_PASSWORD=admin
+        - PMA_HOST=mysql
+        - TZ=America/Maceio
+      ports:
+        - '9090:80'
+      depends_on:
+        - mysql
+      networks:
+        - letramundo
+
+networks:
+  letramundo:
