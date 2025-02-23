@@ -7,7 +7,7 @@ services:
       networks:
         - letramundo
       volumes:
-        - /home/phpdro/Documents/projects/letramundo-back:/app
+        - C:\Users\arthu\letramundo-back:/app
       environment:
         - APP_ENV=local
 
