@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('avatars', function (Blueprint $table) {
             $table->id();
-            $table->blob('image');
+            $table->binary('image');
             $table->foreignIdFor(Theme::class)->cascadeOnDelete();
             $table->timestamps();
         });
