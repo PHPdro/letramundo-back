@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Student extends Model
+class Avatar extends Model
 {
-    public function user () : BelongsTo
+    public function themes() : BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Theme::class);
     } 
 }
