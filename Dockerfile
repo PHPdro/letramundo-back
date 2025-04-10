@@ -14,8 +14,8 @@ RUN apk del gcc musl-dev wget
 RUN rm -rf /tmp/.zip /var/cache/apk/ /tmp/pear/
 
 ENV APP_ENV=local
-ENV PHP_DATE_TIMEZONE America/Maceio
-ENV WEB_DOCUMENT_ROOT /app/public
+ENV PHP_DATE_TIMEZONE=America/Maceio
+ENV WEB_DOCUMENT_ROOT=/app/public
 
 WORKDIR /app
 
