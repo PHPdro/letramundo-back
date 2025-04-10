@@ -7,32 +7,56 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): Response
+    public function store(LoginRequest $request): JsonResponse
     {
-        $request->authenticate();
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)){
 
-        $request->session()->regenerate();
+            $message = 'Login Success';
+            $user = $request->user();
+            $token = $user->createToken('login_token')->plainTextToken;
+            $response = [
+                "message" => $message,
+                "data" => [
+                    "token" => $token,
+                    "token_type" => 'Bearer'
+                ]
+            ];
 
-        return response()->noContent();
+            return response()->json($response, 200);
+        } else {
+            $message = 'Error';
+            $response = [
+                "message" => $message,
+            ];
+            return response()->json($response, 404);
+        }
     }
 
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request): Response
+    public function destroy(Request $request): JsonResponse
     {
         Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
+        $user = $request->user();
+        $token = $user->createToken('Auth_token')->plainTextToken;
 
-        $request->session()->regenerateToken();
+        $response = [
+            "data" => [
+                "token" => $token,
+                "token_type" => 'Bearer'
+            ]
+        ];
 
-        return response()->noContent();
+        return response()->json($response, 200);
     }
 }
