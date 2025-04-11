@@ -30,7 +30,7 @@ class StudentController extends Controller
         }
     }
 
-    public function show(string|null $id = null): JsonResponse
+    public function show(string $id): JsonResponse
     {
         try {
             $student = (new StudentService())->getStudents($id);
@@ -41,6 +41,25 @@ class StudentController extends Controller
             $response = [
                 "data" => [
                     "message" => 'Aluno não encontrado.',
+                    "error" => $e->getMessage()
+                ]
+            ];
+
+            return response()->json($response, 404);
+        }
+    }
+
+    public function showAll() : JsonResponse
+    {
+        try {
+            $students = (new StudentService())->getStudents('');
+
+            return response()->json($students, 200);
+
+        } catch(\Exception $e) {
+            $response = [
+                "data" => [
+                    "message" => 'Nenhum aluno encontrado.',
                     "error" => $e->getMessage()
                 ]
             ];
