@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         Theme::factory()->create([
-            'name' => 'Test User',
+            'name' => 'Test Theme',
         ]);
     }
 }

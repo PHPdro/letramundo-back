@@ -38,3 +38,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 Route::apiResource('/students', \App\Http\Controllers\StudentController::class)
     ->middleware('auth:sanctum')
     ->only(['store', 'show', 'update', 'destroy']);
+
+Route::get('/students', [\App\Http\Controllers\StudentController::class, 'showAll'])
+    ->middleware('auth:sanctum')
+    ->name('students.showAll');
