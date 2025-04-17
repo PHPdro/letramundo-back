@@ -42,3 +42,5 @@ Route::apiResource('/students', \App\Http\Controllers\StudentController::class)
 Route::get('/students', [\App\Http\Controllers\StudentController::class, 'showAll'])
     ->middleware('auth:sanctum')
     ->name('students.showAll');
+
+Route::post('/test', [\App\Http\Controllers\StudentController::class, 'test']);
