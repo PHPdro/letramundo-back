@@ -18,7 +18,6 @@ class StudentFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'age' => fake()->numberBetween(4, 10),
             'year' => fake()->numberBetween(1, 5),
             'class' => fake()->randomElement(['A', 'B', 'C']),
             'user_id' => \App\Models\User::factory(),

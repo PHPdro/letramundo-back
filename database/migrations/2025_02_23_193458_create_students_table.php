@@ -16,7 +16,6 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->integer('age');
             $table->integer('year');
             $table->string('class');
             $table->foreignIdFor(User::class)->cascadeOnDelete();
