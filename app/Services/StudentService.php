@@ -52,4 +52,36 @@ class StudentService
 
         return $response;
     }
+
+    public function updateStudent(array $data, string $id): array
+    {
+        $student = Student::findOrFail($id);
+        $student->update($data);
+
+        $response = [
+            "data" => [
+                "id" => $student->id,
+                "name" => $student->name,
+                "age" => $student->age,
+                "year" => $student->year,
+                "class" => $student->class,
+            ]
+        ];
+
+        return $response;
+    }
+
+    public function deleteStudent(string $id): array
+    {
+        $student = Student::findOrFail($id);
+        $student->delete();
+
+        $response = [
+            "data" => [
+                "message" => 'Aluno deletado com sucesso.'
+            ]
+        ];
+
+        return $response;
+    }
 }

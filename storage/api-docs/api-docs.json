@@ -7,6 +7,32 @@
     },
     "paths": {
         "/api/students": {
+            "get": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Get all students",
+                "description": "Get all students",
+                "operationId": "getAllStudents",
+                "responses": {
+                    "200": {
+                        "description": "Students retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No students found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Students"
@@ -65,6 +91,45 @@
                     },
                     "422": {
                         "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/students/{id}": {
+            "get": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Get a student by ID",
+                "description": "Get a student by ID",
+                "operationId": "getStudent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the student to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Student not found",
                         "content": {
                             "application/json": {
                                 "schema": {}
