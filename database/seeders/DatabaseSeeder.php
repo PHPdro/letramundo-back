@@ -17,6 +17,22 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        $themes = [
+            [
+                'name' => 'Dinossauros',
+            ],
+            [
+                'name' => 'Praia',
+            ],
+            [
+                'name' => 'Alimentos',
+            ],
+        ];
+
+        foreach ($themes as $theme) {
+            Theme::create($theme);
+        }
+
         Student::factory(3)->create();
     }
 }

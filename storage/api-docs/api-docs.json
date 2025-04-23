@@ -138,12 +138,44 @@
                     }
                 }
             }
+        },
+        "/api/themes": {
+            "get": {
+                "tags": [
+                    "Themes"
+                ],
+                "summary": "Get all themes",
+                "description": "Get all themes",
+                "operationId": "getAllThemes",
+                "responses": {
+                    "200": {
+                        "description": "Themes retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No themes found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "tags": [
         {
             "name": "Students",
             "description": "Students"
+        },
+        {
+            "name": "Themes",
+            "description": "Themes"
         }
     ]
 }

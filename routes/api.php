@@ -44,3 +44,7 @@ Route::get('/students', [\App\Http\Controllers\StudentController::class, 'showAl
     ->name('students.showAll');
 
 Route::post('/test', [\App\Http\Controllers\StudentController::class, 'test']);
+
+Route::get('/themes', [\App\Http\Controllers\ThemeController::class, 'show'])
+    ->middleware('auth:sanctum')
+    ->name('themes.show');
