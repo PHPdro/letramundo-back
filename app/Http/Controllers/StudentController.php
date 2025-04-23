@@ -31,9 +31,8 @@ class StudentController extends Controller
      *                 mediaType="multipart/form-data",
      *                 @OA\Schema(
      *                    type="object",
-     *                    required={"name", "age", "year", "class", "user_id", "theme_id"},
+     *                    required={"name", "year", "class", "theme_id"},
      *                    @OA\Property(property="name", type="string"),
-     *                    @OA\Property(property="age", type="integer"),
      *                    @OA\Property(property="year", type="integer"),
      *                    @OA\Property(property="class", type="string"),
      *                    @OA\Property(property="user_id", type="integer"),
