@@ -46,10 +46,10 @@ class StudentController extends Controller
      *       description="Student Created",
      *       @OA\JsonContent()
      *    ),
-     *   @OA\Response(
-     *      response=422,
-     *      description="Unprocessable Entity",
-     *      @OA\JsonContent()
+     *     @OA\Response(
+     *       response=422,
+     *       description="Unprocessable Entity",
+     *       @OA\JsonContent()
      *   ),
      * )
      */
@@ -72,6 +72,33 @@ class StudentController extends Controller
         }
     }
 
+    /**
+     * @OA\Get(
+     *    path="/api/students/{id}",
+     *    operationId="getStudent",
+     *    tags={"Students"},
+     *    summary="Get a student by ID",
+     *    description="Get a student by ID",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the student to retrieve",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *       response=200,
+     *       description="Student retrieved successfully",
+     *       @OA\JsonContent()
+     *    ),
+     *      @OA\Response(
+     *       response=404,
+     *       description="Student not found",
+     *       @OA\JsonContent()
+     *   ),
+     * )
+     */
+
     public function show(string $id): JsonResponse
     {
         try {
@@ -90,6 +117,27 @@ class StudentController extends Controller
             return response()->json($response, 404);
         }
     }
+
+    /**
+     * @OA\Get(
+     *    path="/api/students",
+     *    operationId="getAllStudents",
+     *    tags={"Students"},
+     *    summary="Get all students",
+     *    description="Get all students",
+     *     @OA\Response(
+     *       response=200,
+     *       description="Students retrieved successfully",
+     *       @OA\JsonContent()
+     *    ),
+     *
+     *      @OA\Response(
+     *       response=404,
+     *       description="No students found",
+     *       @OA\JsonContent()
+     *   ),
+     * )
+     */
 
     public function showAll() : JsonResponse
     {
@@ -110,19 +158,41 @@ class StudentController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $student = (new StudentService())->updateStudent($request->validated(), $id);
+
+            return response()->json($student, 200);
+
+        } catch(\Exception $e) {
+            $response = [
+                "data" => [
+                    "message" => 'Erro na atualização.',
+                    "error" => $e->getMessage()
+                ]
+            ];
+
+            return response()->json($response, 422);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        try {
+            $student = (new StudentService())->deleteStudent($id);
+
+            return response()->json($student, 200);
+
+        } catch(\Exception $e) {
+            $response = [
+                "data" => [
+                    "message" => 'Erro na exclusão.',
+                    "error" => $e->getMessage()
+                ]
+            ];
+
+            return response()->json($response, 422);
+        }
     }
 }
