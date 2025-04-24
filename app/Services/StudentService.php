@@ -60,7 +60,6 @@ class StudentService
             "data" => [
                 "id" => $student->id,
                 "name" => $student->name,
-                "age" => $student->age,
                 "year" => $student->year,
                 "class" => $student->class,
             ]
