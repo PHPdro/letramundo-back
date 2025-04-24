@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        User::factory(1)->create([
+        User::create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
@@ -36,7 +36,5 @@ class DatabaseSeeder extends Seeder
         foreach ($themes as $theme) {
             Theme::create($theme);
         }
-
-        Student::factory(3)->create();
     }
 }
