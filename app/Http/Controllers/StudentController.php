@@ -157,6 +157,46 @@ class StudentController extends Controller
         }
     }
 
+    /**
+     * @OA\Put(
+     *    path="/api/students/{id}",
+     *    operationId="updateStudent",
+     *    tags={"Students"},
+     *    summary="Update a student by ID",
+     *    description="Update a student by ID",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the student to update",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         required=true,
+     *         description="Student data to update",
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(property="name", type="string"),
+     *                 @OA\Property(property="year", type="integer"),
+     *                 @OA\Property(property="class", type="string"),
+     *                 @OA\Property(property="theme_id", type="integer"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Student updated successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error"
+     *     )
+     * )
+     */
+
     public function update(Request $request, string $id)
     {
         try {
@@ -175,6 +215,32 @@ class StudentController extends Controller
             return response()->json($response, 422);
         }
     }
+
+    /**
+     * @OA\Delete(
+     *    path="/api/students/{id}",
+     *    operationId="deleteStudent",
+     *    tags={"Students"},
+     *    summary="Delete a student by ID",
+     *    description="Delete a student by ID",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the student to delete",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *       response=200,
+     *       description="Student deleted successfully"
+     *    ),
+     *      @OA\Response(
+     *       response=422,
+     *       description="Unprocessable Entity",
+     *       @OA\JsonContent()
+     *   ),
+     * )
+     */
 
     public function destroy(string $id)
     {
