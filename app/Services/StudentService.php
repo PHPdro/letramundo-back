@@ -30,14 +30,14 @@ class StudentService
     public function getStudents(string $id): array
     {
         if (empty($id)) {
-            $student = Student::all();
+            $student = Student::where('user_id', Auth::id())->get();
             $response = [
                 "data" => [
                     "students" => $student
                 ]
                 ];
         } else {
-            $student = Student::findOrFail($id);
+            $student = Student::findOrFail($id)->where('user_id', Auth::id())->first();
             $response = [
                 "data" => [
                     "id" => $student->id,
