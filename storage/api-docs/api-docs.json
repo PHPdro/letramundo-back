@@ -6,6 +6,54 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/students/{id}/progress": {
+            "put": {
+                "tags": [
+                    "Progress"
+                ],
+                "summary": "Update student progress",
+                "description": "Update student progress",
+                "operationId": "storeProgress",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "student_id"
+                                ],
+                                "properties": {
+                                    "student_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Progress Updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/students": {
             "get": {
                 "tags": [
@@ -251,6 +299,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Progress",
+            "description": "Progress"
+        },
         {
             "name": "Students",
             "description": "Students"

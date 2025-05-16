@@ -48,3 +48,7 @@ Route::post('/test', [\App\Http\Controllers\StudentController::class, 'test']);
 Route::get('/themes', [\App\Http\Controllers\ThemeController::class, 'show'])
     ->middleware('auth:sanctum')
     ->name('themes.show');
+
+Route::put('/students/{id}/progress', [\App\Http\Controllers\ProgressController::class, 'update'])
+    ->middleware('auth:sanctum')
+    ->name('progress.update');

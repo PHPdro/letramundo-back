@@ -22,5 +22,10 @@ class Student extends Model
     public function user () : BelongsTo
     {
         return $this->belongsTo(User::class);
-    } 
+    }
+
+    public function progress() : BelongsTo
+    {
+        return $this->belongsTo(Progress::class);
+    }
 }
