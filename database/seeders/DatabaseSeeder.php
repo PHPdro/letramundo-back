@@ -8,6 +8,8 @@ use App\Models\Student;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Level;
+use App\Models\Phase;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,6 +39,29 @@ class DatabaseSeeder extends Seeder
 
         foreach ($themes as $theme) {
             Theme::create($theme);
+        }
+
+        Level::create([
+            'level' => 1,
+            'title' => 'Nível 1 - Vogais',
+        ]);
+        Level::create([
+            'level' => 2,
+            'title' => 'Nível 2 - Consoante V',
+        ]);
+
+        for ($i = 1; $i <= 10; $i++) {
+            Phase::create([
+                'phase' => $i,
+                'level_id' => 1,
+            ]);
+        }
+
+        for ($i = 1; $i <= 8; $i++) {
+            Phase::create([
+                'phase' => $i,
+                'level_id' => 2,
+            ]);
         }
     }
 }

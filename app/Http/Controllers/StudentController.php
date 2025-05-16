@@ -197,7 +197,7 @@ class StudentController extends Controller
      * )
      */
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id) : JsonResponse
     {
         try {
             $student = (new StudentService())->updateStudent($request->validated(), $id);
@@ -242,7 +242,7 @@ class StudentController extends Controller
      * )
      */
 
-    public function destroy(string $id)
+    public function destroy(string $id) : JsonResponse
     {
         try {
             $student = (new StudentService())->deleteStudent($id);
