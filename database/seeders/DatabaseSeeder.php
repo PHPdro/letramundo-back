@@ -50,6 +50,16 @@ class DatabaseSeeder extends Seeder
             'title' => 'Nível 2 - Consoante V',
         ]);
 
+        Level::create([
+            'level' => 3,
+            'title' => 'Nível 3 - Consoante F',
+        ]);
+
+        Level::create([
+            'level' => 4,
+            'title' => 'Nível 4 - Consoante L',
+        ]);
+
         for ($i = 1; $i <= 10; $i++) {
             Phase::create([
                 'phase' => $i,
@@ -61,6 +71,20 @@ class DatabaseSeeder extends Seeder
             Phase::create([
                 'phase' => $i,
                 'level_id' => 2,
+            ]);
+        }
+
+        for ($i = 1; $i <= 8; $i++) {
+            Phase::create([
+                'phase' => $i,
+                'level_id' => 3,
+            ]);
+        }
+
+        for ($i = 1; $i <= 8; $i++) {
+            Phase::create([
+                'phase' => $i,
+                'level_id' => 4,
             ]);
         }
     }
