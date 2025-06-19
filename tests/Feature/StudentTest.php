@@ -53,6 +53,23 @@ class StudentTest extends TestCase
         $this->assertEquals($errors,'The name field is required.');
     }
 
+    public function test_student_cannot_be_created_without_year_field()
+    {
+        $user = \App\Models\User::factory()->create();
+        $theme = \App\Models\Theme::factory()->create();
+
+        $this->actingAs($user);
+
+        $this->post('api/students', [
+            'name' => $this->faker->name,
+            'class' => $this->faker->randomLetter,
+            'theme_id' => $theme->id,
+        ]);
+
+        $errors = session('errors')->get('year')[0];
+        $this->assertEquals($errors,'The year field is required.');
+    }
+
     public function test_student_can_be_updated()
     {
         $user = \App\Models\User::factory()->create();
