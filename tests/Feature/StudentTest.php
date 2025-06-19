@@ -36,6 +36,23 @@ class StudentTest extends TestCase
         ]);
     }
 
+    public function test_student_cannot_be_created_without_name_field()
+    {
+        $user = \App\Models\User::factory()->create();
+        $theme = \App\Models\Theme::factory()->create();
+
+        $this->actingAs($user);
+
+        $this->post('api/students', [
+            'year' => $this->faker->numberBetween(1, 5),
+            'class' => $this->faker->randomLetter,
+            'theme_id' => $theme->id,
+        ]);
+
+        $errors = session('errors')->get('name')[0];
+        $this->assertEquals($errors,'The name field is required.');
+    }
+
     public function test_student_can_be_updated()
     {
         $user = \App\Models\User::factory()->create();
@@ -78,4 +95,5 @@ class StudentTest extends TestCase
             'id' => $student->id,
         ]);
     }
+
 }
