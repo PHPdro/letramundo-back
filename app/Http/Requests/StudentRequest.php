@@ -24,7 +24,7 @@ class StudentRequest extends FormRequest
         return [
             'name' => 'required|string|max:30',
             'year' => 'required|integer|min:1|max:12',
-            'class' => 'required|string|max:10',
+            'class' => 'required|string|max:1',
             'user_id' => 'integer|exists:users,id',
             'theme_id' => 'required|integer|exists:themes,id',
         ];
