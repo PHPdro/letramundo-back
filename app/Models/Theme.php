@@ -16,13 +16,8 @@ class Theme extends Model
         'name',
     ];
 
-    public function words() : HasMany
+    public function students(): HasMany
     {
-        return $this->hasMany(Word::class);
+        return $this->hasMany(Student::class);
     }
-
-    public function avatars() : HasMany
-    {
-        return $this->hasMany(Avatar::class);
-    } 
 }

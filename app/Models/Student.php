@@ -24,6 +24,11 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function theme() : BelongsTo
+    {
+        return $this->belongsTo(Theme::class);
+    }
+
     public function progress() : BelongsTo
     {
         return $this->belongsTo(Progress::class);
