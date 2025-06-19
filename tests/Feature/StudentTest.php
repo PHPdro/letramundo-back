@@ -61,4 +61,21 @@ class StudentTest extends TestCase
             'theme_id' => $theme->id,
         ]);
     }
+
+    public function test_student_can_be_deleted()
+    {
+        $user = \App\Models\User::factory()->create();
+        $theme = \App\Models\Theme::factory()->create();
+        $student = \App\Models\Student::factory()->create(['user_id' => $user->id, 'theme_id' => $theme->id]);
+
+        $this->actingAs($user);
+
+        $response = $this->delete("api/students/$student->id");
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseMissing('students', [
+            'id' => $student->id,
+        ]);
+    }
 }
