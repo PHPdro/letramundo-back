@@ -103,6 +103,34 @@ class StudentTest extends TestCase
         $this->assertEquals($errors,'The theme id field is required.');
     }
 
+    public function test_student_can_be_retrieved()
+    {
+        $user = \App\Models\User::factory()->create();
+        $theme = \App\Models\Theme::factory()->create();
+        \App\Models\Level::create([
+            'title' => 'Beginner',
+            'level' => 1,
+        ])->phases()->create([
+            'phase' => 1,
+        ]);
+
+
+        $this->actingAs($user);
+
+        $this->post('api/students', [
+            'name' => $this->faker->name,
+            'year' => $this->faker->numberBetween(1, 5),
+            'class' => $this->faker->randomLetter,
+            'theme_id' => $theme->id,
+        ]);
+
+        $student = \App\Models\Student::where('user_id', $user->id)->first();
+
+        $response = $this->get("api/students/$student->id");
+
+        $response->assertStatus(200);
+    }
+
     public function test_student_can_be_updated()
     {
         $user = \App\Models\User::factory()->create();
