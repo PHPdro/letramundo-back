@@ -87,6 +87,22 @@ class StudentTest extends TestCase
         $this->assertEquals($errors,'The class field is required.');
     }
 
+    public function test_student_cannot_be_created_without_theme_id_field()
+    {
+        $user = \App\Models\User::factory()->create();
+
+        $this->actingAs($user);
+
+        $this->post('api/students', [
+            'name' => $this->faker->name,
+            'year' => $this->faker->numberBetween(1, 5),
+            'class' => $this->faker->randomLetter,
+        ]);
+
+        $errors = session('errors')->get('theme_id')[0];
+        $this->assertEquals($errors,'The theme id field is required.');
+    }
+
     public function test_student_can_be_updated()
     {
         $user = \App\Models\User::factory()->create();
