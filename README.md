@@ -22,7 +22,7 @@
 
 3. Start the containers:
    ```sh
-   docker-compose up --build
+   docker-compose up -d
    ```
 
 4. Install dependencies and generate the application key (inside the container):
@@ -80,7 +80,3 @@ or
 ## API Documentation
 
 After starting the app, visit [http://localhost:8080/api/documentation](http://localhost:8080/api/documentation) for Swagger UI.
-
----
-
-For more details, see [README.md](README.md).
