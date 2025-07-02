@@ -27,7 +27,10 @@ class DatabaseSeeder extends Seeder
 
         $themes = [
             [
-                'name' => 'Dinossauros',
+                'name' => 'Cowboy',
+            ],
+            [
+                'name' => 'Animais',
             ],
             [
                 'name' => 'Praia',
