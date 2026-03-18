@@ -10,11 +10,22 @@ class StudentTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
+    private function seedLevelAndPhase(int $levelNumber = 1): void
+    {
+        \App\Models\Level::create([
+            'title' => "Nível {$levelNumber}",
+            'level' => $levelNumber,
+        ])->phases()->create([
+            'phase' => 1,
+        ]);
+    }
+
     public function test_student_can_be_created()
     {
 
         $user = \App\Models\User::factory()->create();
         $theme = \App\Models\Theme::factory()->create();
+        $this->seedLevelAndPhase(1);
 
         $this->actingAs($user);
 
@@ -40,6 +51,7 @@ class StudentTest extends TestCase
     {
         $user = \App\Models\User::factory()->create();
         $theme = \App\Models\Theme::factory()->create();
+        $this->seedLevelAndPhase(1);
 
         $this->actingAs($user);
 
@@ -57,6 +69,7 @@ class StudentTest extends TestCase
     {
         $user = \App\Models\User::factory()->create();
         $theme = \App\Models\Theme::factory()->create();
+        $this->seedLevelAndPhase(1);
 
         $this->actingAs($user);
 
@@ -74,6 +87,7 @@ class StudentTest extends TestCase
     {
         $user = \App\Models\User::factory()->create();
         $theme = \App\Models\Theme::factory()->create();
+        $this->seedLevelAndPhase(1);
 
         $this->actingAs($user);
 
@@ -90,6 +104,7 @@ class StudentTest extends TestCase
     public function test_student_cannot_be_created_without_theme_id_field()
     {
         $user = \App\Models\User::factory()->create();
+        $this->seedLevelAndPhase(1);
 
         $this->actingAs($user);
 
@@ -107,12 +122,7 @@ class StudentTest extends TestCase
     {
         $user = \App\Models\User::factory()->create();
         $theme = \App\Models\Theme::factory()->create();
-        \App\Models\Level::create([
-            'title' => 'Beginner',
-            'level' => 1,
-        ])->phases()->create([
-            'phase' => 1,
-        ]);
+        $this->seedLevelAndPhase(1);
 
 
         $this->actingAs($user);
@@ -135,12 +145,7 @@ class StudentTest extends TestCase
     {
         $user = \App\Models\User::factory()->create();
         $theme = \App\Models\Theme::factory()->create();
-        \App\Models\Level::create([
-            'title' => 'Beginner',
-            'level' => 1,
-        ])->phases()->create([
-            'phase' => 1,
-        ]);
+        $this->seedLevelAndPhase(1);
 
         $this->actingAs($user);
 

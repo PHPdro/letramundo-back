@@ -44,50 +44,31 @@ class DatabaseSeeder extends Seeder
             Theme::create($theme);
         }
 
-        Level::create([
-            'level' => 1,
-            'title' => 'Nível 1 - Vogais',
-        ]);
-        Level::create([
-            'level' => 2,
-            'title' => 'Nível 2 - Consoante V',
-        ]);
+        $levelTitles = [
+            1 => 'Nível 1 - Vogais',
+            2 => 'Nível 2 - Consoante V',
+            3 => 'Nível 3 - Consoante F',
+            4 => 'Nível 4 - Consoante L',
+            5 => 'Nível 5',
+            6 => 'Nível 6',
+            7 => 'Nível 7',
+            8 => 'Nível 8',
+            9 => 'Nível 9',
+            10 => 'Nível 10',
+            11 => 'Nível 11',
+            12 => 'Nível 12',
+        ];
 
-        Level::create([
-            'level' => 3,
-            'title' => 'Nível 3 - Consoante F',
-        ]);
-
-        Level::create([
-            'level' => 4,
-            'title' => 'Nível 4 - Consoante L',
-        ]);
-
-        for ($i = 1; $i <= 10; $i++) {
-            Phase::create([
-                'phase' => $i,
-                'level_id' => 1,
+        foreach ($levelTitles as $levelNumber => $title) {
+            $level = Level::create([
+                'level' => $levelNumber,
+                'title' => $title,
             ]);
-        }
 
-        for ($i = 1; $i <= 8; $i++) {
+            // Garante pelo menos a fase 1 para cada nível (necessário para cadastro de alunos em qualquer nível).
             Phase::create([
-                'phase' => $i,
-                'level_id' => 2,
-            ]);
-        }
-
-        for ($i = 1; $i <= 8; $i++) {
-            Phase::create([
-                'phase' => $i,
-                'level_id' => 3,
-            ]);
-        }
-
-        for ($i = 1; $i <= 8; $i++) {
-            Phase::create([
-                'phase' => $i,
-                'level_id' => 4,
+                'phase' => 1,
+                'level_id' => $level->id,
             ]);
         }
     }
