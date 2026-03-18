@@ -13,14 +13,21 @@ class StudentService
 {
     public function storeStudent(array $data): array
     {
-
+        $levelNumber = $data['level'] ?? 1;
+        unset($data['level']);
         $data['user_id'] = Auth::id();
 
         $student = Student::create($data);
 
+        $level = Level::where('level', $levelNumber)->firstOrFail();
+        $phaseId = Phase::where('level_id', $level->id)->orderBy('phase')->value('id');
+        if (!$phaseId) {
+            throw new \Exception("Não existe fase cadastrada para o nível {$levelNumber}.");
+        }
+
         $progressData = [
             'student_id' => $student->id,
-            'phase_id' => 1,
+            'phase_id' => $phaseId,
             'is_completed' => false,
         ];
 
@@ -85,7 +92,18 @@ class StudentService
     public function updateStudent(array $data, string $id): array
     {
         $student = Student::findOrFail($id);
+        $levelNumber = $data['level'] ?? null;
+        unset($data['level']);
         $student->update($data);
+
+        if ($levelNumber !== null) {
+            $level = Level::where('level', $levelNumber)->firstOrFail();
+            $phaseId = Phase::where('level_id', $level->id)->orderBy('phase')->value('id');
+            if (!$phaseId) {
+                throw new \Exception("Não existe fase cadastrada para o nível {$levelNumber}.");
+            }
+            (new ProgressService())->setPhaseForStudent((string)$student->id, (int)$phaseId);
+        }
 
         $response = [
             "data" => [

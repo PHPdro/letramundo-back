@@ -27,6 +27,7 @@ class StudentRequest extends FormRequest
             'class' => 'required|string|max:1',
             'user_id' => 'integer|exists:users,id',
             'theme_id' => 'required|integer|exists:themes,id',
+            'level' => 'sometimes|integer|between:1,12|exists:levels,level',
         ];
     }
 }
