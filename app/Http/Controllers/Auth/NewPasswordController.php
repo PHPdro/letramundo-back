@@ -50,4 +50,29 @@ class NewPasswordController extends Controller
 
         return response()->json(['status' => __($status)]);
     }
+
+    /**
+     * Verify the password reset token.
+     */
+    public function verifyToken(Request $request): JsonResponse
+    {
+        $request->validate([
+            'token' => ['required'],
+            'email' => ['required', 'email'],
+        ]);
+
+        $user = \App\Models\User::where('email', $request->email)->first();
+
+        if (! $user) {
+            return response()->json(['valid' => false, 'message' => __('passwords.user')], 404);
+        }
+
+        $isValid = Password::broker()->tokenExists($user, $request->token);
+
+        if ($isValid) {
+            return response()->json(['valid' => true], 200);
+        }
+
+        return response()->json(['valid' => false, 'message' => __('passwords.token')], 400);
+    }
 }
