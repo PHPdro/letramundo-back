@@ -35,6 +35,7 @@ class StudentController extends Controller
      *                    @OA\Property(property="name", type="string"),
      *                    @OA\Property(property="year", type="integer"),
      *                    @OA\Property(property="class", type="string"),
+     *                    @OA\Property(property="avatar", type="string", nullable=true),
      *                    @OA\Property(property="user_id", type="integer"),
      *                    @OA\Property(property="theme_id", type="integer"),
      *               ),
@@ -182,6 +183,7 @@ class StudentController extends Controller
      *                 @OA\Property(property="name", type="string"),
      *                 @OA\Property(property="year", type="integer"),
      *                 @OA\Property(property="class", type="string"),
+     *                 @OA\Property(property="avatar", type="string", nullable=true),
      *                 @OA\Property(property="theme_id", type="integer"),
      *             )
      *         )

@@ -25,6 +25,7 @@ class StudentRequest extends FormRequest
             'name' => 'required|string|max:30',
             'year' => 'required|integer|min:1|max:12',
             'class' => 'required|string|max:1',
+            'avatar' => 'nullable|string|max:255',
             'user_id' => 'integer|exists:users,id',
             'theme_id' => 'required|integer|exists:themes,id',
             'level' => 'sometimes|integer|between:1,12|exists:levels,level',

@@ -39,6 +39,7 @@ class StudentService
                 "name" => $student->name,
                 "year" => $student->year,
                 "class" => $student->class,
+                "avatar" => $student->avatar,
                 "phase_id" => $progress['data']['phase_id'],
             ]
         ];
@@ -78,6 +79,7 @@ class StudentService
                     "name" => $student->name,
                     "year" => $student->year,
                     "class" => $student->class,
+                    "avatar" => $student->avatar,
                     "theme" => $theme->name,
                     "level" => $level->level,
                     "phase" => $phase->phase,
@@ -111,6 +113,7 @@ class StudentService
                 "name" => $student->name,
                 "year" => $student->year,
                 "class" => $student->class,
+                "avatar" => $student->avatar,
             ]
         ];
 
