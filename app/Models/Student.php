@@ -15,6 +15,7 @@ class Student extends Model
         'name',
         'year',
         'class',
+        'avatar',
         'user_id',
         'theme_id',
     ];
