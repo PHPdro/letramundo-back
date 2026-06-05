@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Theme;
 use App\Models\User;
-use App\Models\Student;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -65,11 +64,12 @@ class DatabaseSeeder extends Seeder
                 'title' => $title,
             ]);
 
-            // Garante pelo menos a fase 1 para cada nível (necessário para cadastro de alunos em qualquer nível).
-            Phase::create([
-                'phase' => 1,
-                'level_id' => $level->id,
-            ]);
+            for ($phase = 1; $phase <= 8; $phase++) {
+                Phase::create([
+                    'phase' => $phase,
+                    'level_id' => $level->id,
+                ]);
+            }
         }
     }
 }

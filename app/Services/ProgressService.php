@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Level;
+use App\Models\Phase;
 use App\Models\Progress;
 
 class ProgressService {
@@ -47,19 +49,35 @@ class ProgressService {
         ];
     }
 
-    public function updateProgress(string $id): array
+    public function updateProgress(string $studentId): array
     {
-        $progress = Progress::findOrFail($id);
-        $progress->update([
-            'phase_id' => $progress->phase_id + 1,
-        ]);
+        $progress = Progress::where('student_id', $studentId)->firstOrFail();
+        $currentPhase = Phase::findOrFail($progress->phase_id);
 
-        $response = [
+        $nextPhase = Phase::where('level_id', $currentPhase->level_id)
+            ->where('phase', $currentPhase->phase + 1)
+            ->first();
+
+        if (!$nextPhase) {
+            $currentLevel = Level::findOrFail($currentPhase->level_id);
+            $nextLevel = Level::where('level', $currentLevel->level + 1)->first();
+
+            if (!$nextLevel) {
+                throw new \Exception("Parabéns! Todos os níveis foram concluídos.");
+            }
+
+            $nextPhase = Phase::where('level_id', $nextLevel->id)
+                ->orderBy('phase')
+                ->firstOrFail();
+        }
+
+        $progress->update(['phase_id' => $nextPhase->id]);
+
+        return [
             "data" => [
                 "student_id" => $progress->student_id,
                 "phase_id" => $progress->phase_id,
             ]
         ];
-        return $response;
     }
 }

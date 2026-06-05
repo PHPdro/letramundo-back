@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Progress extends Model
 {
@@ -12,8 +12,8 @@ class Progress extends Model
         'phase_id',
     ];
 
-    public function student(): HasMany
+    public function student(): BelongsTo
     {
-        return $this->hasMany(Student::class);
+        return $this->belongsTo(Student::class);
     }
 }
